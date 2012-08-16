@@ -1,17 +1,22 @@
+//We are putting the entire application into a TabPanel. TabBar docked to bottom.
+
 Ext.define('wgo-hung.view.Main', {
-    extend: 'Ext.Toolbar',
-    xtype: 'mainbar',
-
+    extend: 'Ext.TabPanel',
+    xtype: 'main',
+    id: 'idMain'
+    ,
     config: {
+        tabBar: {
         docked: 'bottom',
+        layout: {
+            type: 'hbox',
+            align: 'middle'
+        }},
         items: [
-            { 
-                xtype: 'button',
-                iconCls: 'home',
-                iconMask: true,
-                action: 'btnDashBoardClick'
-
-            }
+            { xtype: 'home' },
+            { xtype: 'issuelist' },
+            { xtype: 'festivallist' },
+            { xtype: 'userlist' } 
         ]
     }
 });

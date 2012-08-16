@@ -1,13 +1,10 @@
 Ext.application({
-    models: ["Issue", "Festival"],
-
-    views: ['Header', 'Footer', 'Login', 'FestivalList', 'FestivalDetail', 'IssuesList', 'IssuesDetail', 'Home', 'Main'],
-
-    controllers: ["Main", "Issues", "Festival"],
-
-    stores:['FestivalStore', 'IssueStore'],
-
     name: 'wgo-hung',
+
+    models: ['Festival','Issue','User'],
+    views:  ['Header','Footer','Login','Home', 'Main','FestivalList','IssueList','UserList','AddUser'],
+    controllers: ['Main','Festival','UserController'],
+    stores: ['FestivalStore','IssueStore','UserStore'],
 
     requires: [
         'Ext.MessageBox',
@@ -39,11 +36,11 @@ Ext.application({
     launch: function() {
         //Delaying for a while
         var task = Ext.create('Ext.util.DelayedTask', function() {
-            // Destroy the #appLoadingIndicator element
+            // Destroy the #appLoadingIndicator element. Ext.fly is like Ext.get
             Ext.fly('appLoadingIndicator').destroy();
             //Change the index.html background color to white
             Ext.get('wgo-pg-body').setStyle('backgroundColor', 'white');
-            // Initialize the main view -- *Todo: Check if authentication already available?/
+            // Initialize the main view
             Ext.Viewport.add(Ext.create('wgo-hung.view.Login'));
         });
         task.delay(0);

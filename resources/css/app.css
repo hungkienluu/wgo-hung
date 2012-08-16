@@ -9701,7 +9701,7 @@ input[type="search"]::-webkit-search-cancel-button {
 div.vm-header-logo {
     border-top-width:10px;
     border-top-style:solid;
-    border-top-color:#99CCFF;
+    border-top-color:#3081FB;
     padding-top: 2px;
     padding-bottom: 5px;height: 65px;
     background-color: white;
@@ -9728,7 +9728,7 @@ div.vm-header-logo {
     height:40px;
     margin: 8px 0px 0 0px;
     width: 40px;
-    background: #99CCFF;
+    background: #008AFF;
     text-align: center;
     vertical-align: middle;
     margin-left: 20px;
@@ -9743,7 +9743,7 @@ div.vm-header-logo {
     color: #FFFFFF;
 }
 /*login panel (Start)*/
-.vm-footer-strip{border-bottom-color: #99CCFF;border-bottom-width:50px;border-bottom-style:solid;}
+.vm-footer-strip{border-bottom-color:#3081FB;border-bottom-width:50px;border-bottom-style:solid;}
 /*Hack to make Form background to white color i.e. overriding sencha's default greay color*/
 .vm-form .x-scroll-container {background-color: #ffffff;}
 /*Login Form fields*/
@@ -9763,17 +9763,6 @@ div.vm-header-logo {
 }
 /*login panel (End)*/
 
-/*home panel (Start)*/
-.btnDashboard.x-button {
-      background-color: transparent;
-      background-image: none;
-}
- 
-.btnDashboard.x-button, .x-toolbar .x-button {
-      border: none;
-}
-/*home panel (End)*/
-
 /*Festival List (Start)*/
 .vm-festival{font-family: Arial;font-size: 12px;width: 85%;}
 .vm-festival-title {white-space: nowrap;text-overflow: ellipsis;overflow: hidden;font-weight: bold;margin: 0px;color: #F01D4F}
@@ -9781,4 +9770,49 @@ div.vm-header-logo {
 .vm-festival-timings {color:#00B050;position: absolute;bottom: 2em;right: 2.5em;}
 .vm-festival-content {white-space: nowrap;text-overflow: ellipsis; overflow: hidden;padding-top: 2px;color: rgb(165,165,165);position: absolute;bottom: .8em;left: .5em;}
 .x-item-selected .vm-festival-content{color: #CECECE;}
-/*Festival List(End)*/
+/*Festival List (End)*/
+
+.vm-btn-dashboard.x-button {
+    background-color: transparent;
+    background-image: none;
+}
+.vm-btn-dashboard-top.x-button {
+    background-color: transparent;
+    background-image: none;
+}
+
+/*Home/Dashboard*/
+.vm-btn-dashboard  {border: none; padding-bottom: 50px;}
+.vm-btn-dashboard-top  {border: none; padding-bottom: 50px;padding-top: 50px;}
+
+/*Hack to make Form background to white color i.e. overriding sencha's default greay color*/
+.vm-dashboard .x-body {background-color: rgb(125,196,255);}
+.vm-dashboard-notes{font-family: Arial;font-size: 12px;text-align: center;}
+/*Login Form fields*/
+/*Table less approach to display key-value details*/
+.vm-profile{font-family: Arial;font-size:12px;}
+.vm-profile-key{display:block;font-weight:bold;text-align:right;float:left;}
+.vm-profile-value{float:left;font-size:12px;margin:0px 0 0px 10px;color: rgb(165,165,165);}
+.vm-profile-details{font-size:12px;color: rgb(165,165,165);}
+
+/*Issues List (Start)*/
+.vm-wgo-monthly-issues {
+    min-height: 40px;
+}
+.vm-wgo-monthly-issues img {
+    border-radius: 5px;
+    float: left;
+}
+.vm-wgo-monthly-issues .issue {
+    white-space: nowrap;
+    text-overflow: ellipsis;overflow: hidden;font-size: 16px;margin: 0px;color: #F01D4F;padding-top: 15px;
+    padding-left: 20px;
+}
+.x-item-selected .vm-wgo-monthly-issues .issue {
+    color: #ffffff;
+}
+/*Issues List (End)*/
+
+.clsUsers .x-navigation-bar {
+  display:none;
+}

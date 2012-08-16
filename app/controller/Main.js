@@ -1,58 +1,64 @@
 Ext.define('wgo-hung.controller.Main', {
     extend: 'Ext.app.Controller',
-    
     config: {
         refs: {
-            //Refs enable us to do component query or query by xtype.  Sencha auto creates a function like getMain or getLoginform for us
-            //<anyKey> : <object / dom identifier / xtype> is the structure for refs
-            main: 'main',
-            loginForm:'login'
+            loginForm:'login' // <anyKey> : <object/dom identifier> this will freely create a function called get<AnyKey>()
+            // We can also use xtype i.e. loginForm:'login'
         },
         control: {
-            //Attach event handlers for controls matched by component queries
-            'button[action=btnLoginSubmit]' : {tap:"submitLoginForm"}, //Uses ComponentQuery selector to find the matching component and attaches a function
-            'button[action=btnDashBoardClick]' : {tap:"btnDashboardClick"},
-            'button[action=btnGetIssues]' : {tap:"btnGetIssues"},
-            'button[action=btnGetFestivals]' : {tap:"btnGetFestivals"}   
+            //Attach event handlers for controls matched by component queries. In this case button whose action="btnLoginSubmit" is queried
+            // and for the query result, event handler function "submitLoginForm" is attached
+            'button[action=btnLoginSubmit]' : {tap:"submitLoginForm"}, //Uses ComponentQuery selector to find the matching
+            'button[action=btnDashboardClick]' : {tap:"btnDashboardClick"} //Uses ComponentQuery selector to find the matching
         }
     },
-    
-    //called when the Application is launched, remove if not needed
+    //------------------------------------------------------------------------------------------------------------------
     init: function() {
-        console.log("Main controller init(Start")
-        console.log("Main controller init(End)")
-        
+        console.log("Main controller init(Start)");
+        console.log("Main controller init(End)");
     },
-
+    //------------------------------------------------------------------------------------------------------------------
     //Event Handler for login button tap action
-    submitLoginForm: function(){
-        var form = this.getLoginForm(); //the getLoginForm function was created by making loginForm a ref
+    submitLoginForm:function(){
+        console.log("login button tap event (Start)");
+        // Mask the viewport
+        Ext.Viewport.mask();
+        var form = this.getLoginForm(); //We got this for free through refs above
+        //get username and password from form elements
+        var user = form.getValues().txtUserName;
+        var pwd = form.getValues().txtPassword;
         console.log("Before Form Submit")
-        form.submit({
-            url:'login.json', //Fires an AJAX call to authenticate. This is a Sencha Touch function
-            success: function(){Ext.Viewport.setActiveItem({xtype:'home'},{xtype:'slide',direction:'right'});}, //on success - show the home panel with animation? check to see if necessary
-            failure: function(){console.log("Form submit callback Failure - Authentication Fail")}
-        })
+        Ext.util.JSONP.request({
+            //url: 'http://wgo-1.apphb.com/authenticate',
+            //url: 'http://wgo-hung-ror.herokuapp.com/users/authenticate',
+            url: 'http://blooming-cliffs-5908.herokuapp.com/users/authenticate',
+            dataType: "jsonp",
+            params: {
+                username: user,
+                password: pwd
+            },
+            success: function(result, request) {
+                Ext.Viewport.unmask();
+                if (result.Success) {
+                    Ext.Viewport.setActiveItem({xtype:'main'},{type: 'slide', direction: 'right'});
+                }else{
+                    Ext.Msg.alert("Unauthorized access");
+                }
+            },
+            failure: function(result, request) {
+                // Unmask the viewport
+                Ext.Viewport.unmask();
+                Ext.Viewport.setActiveItem({xtype:'main'},{type: 'slide', direction: 'right'}); //why do we still want to setActiveItem to 'main' on Failure? I don't get it.
+                //Ext.Msg.alert("Network Failure or Time out happened");
+            }
+        });
+        //console.log("login button tap event (End)");
     },
-   //Event Handler for DashboardClick tap action
+    //------------------------------------------------------------------------------------------------------------------
+    //Event Handler Home dashboard button
     btnDashboardClick:function(){
         console.log("btnDashboardClick (Start)")
-        Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);
-        Ext.Viewport.setActiveItem({xtype:'home'},{type: 'slide', direction: 'right'});
+        Ext.getCmp('idMain').setActiveItem(2,{type: 'slide', direction: 'right'}).getTabBar().show();
         console.log("btnDashboardClick (End)")
-    },
-       //Event Handler for GetFestivals tap action
-    btnGetFestivals:function(){
-        console.log("btnGetFestivals (Start)")
-        //Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);
-        Ext.Viewport.setActiveItem({xtype:'festivallist'},{type: 'slide', direction: 'right'});
-        console.log("btnGetFestivals (End)")
-    },
-       //Event Handler for GetIssues tap action
-    btnGetIssues:function(){
-        console.log("btnGetIssues (Start)")
-        //Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);
-        Ext.Viewport.setActiveItem({xtype:'issueslist'},{type: 'slide', direction: 'right'});
-        console.log("btnGetIssues (End)")
     }
- });
+});

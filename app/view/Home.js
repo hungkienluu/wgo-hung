@@ -1,104 +1,114 @@
-Ext.define("wgo-hung.view.Home", {
-    extend:'Ext.Panel',
+//The Home view is the Homescreen. It will be a panel in the TabPanel Container.
+Ext.define('wgo-hung.view.Home', {
+    extend: 'Ext.Panel',
     xtype: 'home',
     config: {
-        //cls:'vm-form',
-        //id:'idHome',
-        //scrollable:true,
-        layout: {
-            type: 'card'
-        },
+        cls:"vm-dashboard",  //this class will override sencha's form background color to white",
+        layout:'vbox', //The panel will be 3 hbox's in a vbox (Vertical Box)
+        scrollable:true,
+        iconCls:'home',
+        title:'Home',
         items: [
-                {
-                    xtype:'panel',
-                    layout: 'vbox',
-                    //scrollable:true,
-                    //cls:'clsDashboardPanel', //to Edit
-                    items : [
-                                {
-                                    xtype: 'header',
-                                    docked: 'top'
-                                },
-                                {
-                                    xtype: 'mainbar'
-                                                                        
-                                },
-                                {
-                                    xtype: 'panel',
-                                    //cls:'clsTopPanel',
-                                    //id:'idTopPanel',
-                                    flex: 1,
-                                    layout: {
-                                        type: 'hbox'
-                                    },
-                                    items: [
-                                            {
-                                                xtype: 'button',
-                                                iconCls: 'favorites',
-                                                iconMask: true,
-                                                cls: 'btnDashboard',
-                                                text: 'Festivals',
-                                                margin: 2,
-                                                flex:1,
-                                                action: 'btnGetFestivals'
-
-                                            },
-                                            {
-                                                xtype: 'button',
-                                                iconCls: 'maps',
-                                                iconMask: true,
-                                                cls: 'btnDashboard',
-                                                text: 'Issues',
-                                                margin: 2,
-                                                flex:1,
-                                                action: 'btnGetIssues'
-
-                                            },
-                                            {
-                                                xtype: 'button',
-                                                cls: 'btnDashboard',
-                                                text: '',
-                                                margin: 2,
-                                                flex:1
-                                            },
-                                            ],
-                                },
-                                {
-                                    xtype: 'panel',
-                                    //cls:'clsMiddlePanel',
-                                    //id:'idMiddlePanel',
-                                    flex: 1,
-                                    layout: {
-                                        type: 'hbox',
-                                        align:'stretch',
-                                        flex:'auto'
-                                    },
-                                    items: [
-                                            {
-                                                xtype: 'button',
-                                                cls: 'btnDashboard',
-                                                text: '',
-                                                margin: 2,
-                                                flex:1
-                                            },
-                                            {
-                                                xtype: 'button',
-                                                cls: 'btnDashboard',
-                                                text: '',
-                                                margin: 2,
-                                                flex:1
-                                            },
-                                            {
-                                                xtype: 'button',
-                                                cls: 'btnDashboard',
-                                                text: '',
-                                                margin: 2,
-                                                flex:1
-                                            }
-                                            ],
-                                },                              
-                        ]                       
-                },
-        ]
+            {
+                xtype: 'panel',
+                layout: 'hbox',
+                items: [
+                    {
+                        xtype: 'button',
+                        html: '<div class="image"><img alt="CAB" src="resources/images/issues.png" align="center" height="48px" width="48px"></div><div class="vm-dashboard-notes">Home</div>',
+                        width:'33%',
+                        action: 'btnDashboardClick',
+                        ui:'round',
+                        cls: 'vm-btn-dashboard-top'
+                    }, {
+                        xtype: 'button',
+                        html: '<div class="image"><img alt="CAB" src="resources/images/icon-text.png" align="center" height="48px" width="48px"></div><div class="vm-dashboard-notes">Haiku</div>',
+                        width:'33%',
+                        action: 'btnDashboardClick',
+                        ui:'round',
+                        cls: 'vm-btn-dashboard-top'
+                    },
+                    {
+                        xtype: 'button',
+                        html: '<div class="image"><img alt="CAB" src="resources/images/icon-calendar.png" align="center" height="48px" width="48px"></div><div class="vm-dashboard-notes">Issues</div>',
+                        width:'33%',
+                        action: 'btnDashboardClick',
+                        ui:'round',
+                        cls: 'vm-btn-dashboard-top'
+                    }]
+            },
+            {
+                xtype: 'panel',
+                layout: 'hbox',
+                items: [
+                    {
+                        xtype: 'button',
+                        html: '<div class="image"><img alt="CAB" src="resources/images/Movie File.png" align="center" height="48px" width="48px"></div><div class="vm-dashboard-notes">Movies</div>',
+                        width:'33%',
+                        action: 'btnDashboardClick',
+                        ui:'round',
+                        cls: 'vm-btn-dashboard'
+                    }, {
+                        xtype: 'button',
+                        html: '<div class="image"><img alt="CAB" src="resources/images/news_512.png" align="center" height="48px" width="48px"></div><div class="vm-dashboard-notes">Announcements</div>',
+                        width:'33%',
+                        action: 'btnDashboardClick',
+                        ui:'round',
+                        cls: 'vm-btn-dashboard'
+                    },
+                    {
+                        xtype: 'button',
+                        html: '<div class="image"><img alt="CAB" src="resources/images/icon-band.png" align="center" height="48px" width="48px"></div><div class="vm-dashboard-notes">Performances</div>',
+                        width:'33%',
+                        action: 'btnDashboardClick',
+                        ui:'round',
+                        cls: 'vm-btn-dashboard'
+                    }]
+            },
+            {
+                xtype: 'panel',
+                layout: 'hbox',
+                items: [
+                    {
+                        xtype: 'button',
+                        html: '<div class="image"><img alt="CAB" src="resources/images/Settings.png" align="center" height="48px" width="48px"></div><div class="vm-dashboard-notes">Settings</div>',
+                        width:'33%',
+                        action: 'btnDashboardClick',
+                        ui:'round',
+                        cls: 'vm-btn-dashboard'
+                    }, {
+                        xtype: 'button',
+                        html: '<div class="image"><img alt="CAB" src="resources/images/Hot_Dog_Car.png" align="center" height="48px" width="48px"></div><div class="vm-dashboard-notes">Festivals</div>',
+                        width:'33%',
+                        action: 'btnDashboardClick',
+                        ui:'round',
+                        cls: 'vm-btn-dashboard'
+                    },
+                    {
+                        xtype: 'button',
+                        html: '<div class="image"><img alt="CAB" src="resources/images/Logout.png" align="center" height="48px" width="48px"></div><div class="vm-dashboard-notes">Logout</div>',
+                        width:'33%',
+                        action: 'btnDashboardClick',
+                        ui:'round',
+                        cls: 'vm-btn-dashboard'
+                    }]
+            },
+            {
+                xtype:'header',
+                docked:'top'
+            },
+            {
+                xtype: 'footer',
+                docked: 'bottom'
+            }
+        ],
+//We are going to hide the TabBar.  I guess we use listener for when the screen is painted and then to hide it.  
+//We use getCmp (looks up existing component by ID) to grab idMain (TabPanel) and then grab the TabBar from it.
+        listeners: {
+            painted: function() {
+                console.log('painted');
+                Ext.getCmp('idMain').getTabBar().hide();
+            }
+        }
     }
 });
