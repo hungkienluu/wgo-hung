@@ -1,4 +1,4 @@
 wgo-hung
 ========
 
-wgo-hung for sencha touch 2
+What's Going On Mobile App Using sencha touch 2

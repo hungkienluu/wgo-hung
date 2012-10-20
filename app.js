@@ -5,7 +5,7 @@ Ext.application({
     views:  ['Header','Footer','Login','Home', 'Main','FestivalList','IssueList','UserList','AddUser'],
     controllers: ['Main','Festival','UserController'],
     stores: ['FestivalStore','IssueStore','UserStore'],
-
+    token: "",
     requires: [
         'Ext.MessageBox',
         'Ext.util.DelayedTask'

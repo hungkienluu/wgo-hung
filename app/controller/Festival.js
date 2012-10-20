@@ -42,9 +42,9 @@ Ext.define('wgo-hung.controller.Festival', {
             message: 'Adding New user...'
         });
         
-        // var button = this.getFestivalformbutton
+        var id = Ext.getCmp('txtFestivalId').getValue();    
 
-        if(1===1){
+        if(id==''){ //if record ID on form is blank (we got this with getCmp above) then make it a POST
         this.PostAjaxRequest();
         } 
     else{
@@ -129,7 +129,7 @@ Ext.define('wgo-hung.controller.Festival', {
     //Create the AddUser view and then setValues with record.get'd Data
     var auv = Ext.create("wgo-hung.view.AddFestival");
         auv.setValues({
-        txtFestivalId: record.get("id"),
+        txtFestivalId: record.get("id"), //this is the same id that RoR uses.  We are using it to populate the Sencha form (hidden ID field).
         txtFestivalName: record.get("name"),
         txtFestivalDetails: record.get("details"),
         txtFestivalCity: record.get("city"),

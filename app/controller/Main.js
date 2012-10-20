@@ -28,30 +28,20 @@ Ext.define('wgo-hung.controller.Main', {
         var user = form.getValues().txtUserName;
         var pwd = form.getValues().txtPassword;
         console.log("Before Form Submit")
-        Ext.util.JSONP.request({
-            //url: 'http://wgo-1.apphb.com/authenticate',
-            //url: 'http://wgo-hung-ror.herokuapp.com/users/authenticate',
-            url: 'http://blooming-cliffs-5908.herokuapp.com/users/authenticate',
-            dataType: "jsonp",
+
+        //POST request to auth_token service
+        Ext.Ajax.request({
+            url: 'http://enigmatic-beyond-3653.herokuapp.com/api/v1/tokens.json',
+            method: 'POST',
+            type: 'json',
             params: {
                 username: user,
                 password: pwd
             },
-            success: function(result, request) {
-                Ext.Viewport.unmask();
-                if (result.Success) {
-                    Ext.Viewport.setActiveItem({xtype:'main'},{type: 'slide', direction: 'right'});
-                }else{
-                    Ext.Msg.alert("Unauthorized access");
-                }
-            },
-            failure: function(result, request) {
-                // Unmask the viewport
-                Ext.Viewport.unmask();
-                Ext.Viewport.setActiveItem({xtype:'main'},{type: 'slide', direction: 'right'}); //why do we still want to setActiveItem to 'main' on Failure? I don't get it.
-                //Ext.Msg.alert("Network Failure or Time out happened");
-            }
+            callback: this.onAuthenticateCallback,
+            scope: this
         });
+
         //console.log("login button tap event (End)");
     },
     //------------------------------------------------------------------------------------------------------------------
@@ -60,5 +50,20 @@ Ext.define('wgo-hung.controller.Main', {
         console.log("btnDashboardClick (Start)")
         Ext.getCmp('idMain').setActiveItem(2,{type: 'slide', direction: 'right'}).getTabBar().show();
         console.log("btnDashboardClick (End)")
+    },
+    onAuthenticateCallback: function(options, success, response) {
+        var authToken = JSON.parse(response.responseText);
+        if(success == true){
+            Ext.Viewport.unmask();
+            localStorage.setItem('auth_token', authToken.token);
+            // wgo-hung.app.token = localStorage.getItem('auth_token');
+            // wgo-hung.app.token = authToken.token;
+            // console.log("Global Variable Token : "+wgo-hung.app.token);
+            Ext.Viewport.setActiveItem({xtype:'main'},{type: 'slide', direction: 'right'});
+        }
+        else{
+            Ext.Viewport.unmask();
+            Ext.Msg.alert("Unauthorized Access");
+        }
     }
 });
